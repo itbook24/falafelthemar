@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falafel Themar Menu</title>
+    <style>
+        :root {
+            --primary-color: #e67e22;
+            --secondary-color: #d35400;
+            --light-color: #f5f5f5;
+            --dark-color: #333;
+            --accent-color: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .menu-categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+        
+        .category-btn {
+            padding: 10px 20px;
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .menu-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .menu-section.active {
+            display: block;
+        }
+        
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .menu-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .item-details {
+            padding: 20px;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .item-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .item-name-arabic {
+            font-size: 1.1rem;
+            direction: rtl;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .item-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .item-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .item-calories {
+            display: inline-block;
+            background-color: var(--light-color);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+        
+        .add-to-cart {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Falafel Themar Menu</h1>
+            <p>Delicious Middle Eastern Cuisine</p>
+        </header>
+        
+        <div class="menu-categories">
+            <button class="category-btn active" data-category="pizzas-pies">Pizzas & Pies</button>
+            <button class="category-btn" data-category="plates-boxes">Plates & Boxes</button>
+            <button class="category-btn" data-category="sandwiches">Sandwiches</button>
+            <button class="category-btn" data-category="add-ons">Add-ons</button>
+            <button class="category-btn" data-category="side-orders">Side Orders</button>
+            <button class="category-btn" data-category="drinks">Drinks</button>
+        </div>
+        
+        <!-- Pizzas & Pies Section -->
+        <section id="pizzas-pies" class="menu-section active">
+            <h2>Pizzas & Pies</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Falafizza" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﻓﻼﻓﻴﺘﺰا</div>
+                                <div class="item-name">Falafizza</div>
+                            </div>
+                            <div class="item-price">19 SAR</div>
+                        </div>
+                        <p class="item-description">Special pizza with oven-prepared falafel balls</p>
+                        <span class="item-calories">870 Cal</span>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Vegetable Pizza" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺑﻴﺘﺰا ﺧﻀﺎر</div>
+                                <div class="item-name">Vegetable Pizza</div>
+                            </div>
+                            <div class="item-price">16 SAR</div>
+                        </div>
+                        <p class="item-description">Oven-prepared vegetable pizza</p>
+                        <span class="item-calories">820 Cal</span>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Chicken Pie" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﻓﻄﻴﺮة دﺟﺎج</div>
+                                <div class="item-name">Chicken Pie</div>
+                            </div>
+                            <div class="item-price">13 SAR</div>
+                        </div>
+                        <p class="item-description">Special chicken pie prepared in the oven</p>
+                        <span class="item-calories">1050 Cal</span>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1601050690123-7245d502f384?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Falafel Pie" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﻓﻄﻴﺮة ﻓﻼﻓﻞ</div>
+                                <div class="item-name">Falafel Pie</div>
+                            </div>
+                            <div class="item-price">12 SAR</div>
+                        </div>
+                        <p class="item-description">Special falafel pie prepared in the oven</p>
+                        <span class="item-calories">650 Cal</span>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Egg & Cheese Pie" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﻓﻄﻴﺮة ﺑﻴﺾ وﺟﺒﻦ</div>
+                                <div class="item-name">Egg & Cheese Pie</div>
+                            </div>
+                            <div class="item-price">9 SAR</div>
+                        </div>
+                        <p class="item-description">Special egg and cheese pie prepared in the oven</p>
+                        <span class="item-calories">450 Cal</span>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1608190003443-86ab9a8ede42?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cheese & Zaatar Pie" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﻓﻄﻴﺮة ﺟﺒﻦ وزﻋﺘﺮ</div>
+                                <div class="item-name">Cheese & Zaatar Pie</div>
+                            </div>
+                            <div class="item-price">9 SAR</div>
+                        </div>
+                        <p class="item-description">Special cheese and zaatar pie prepared in the oven</p>
+                        <span class="item-calories">450 Cal</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Plates & Boxes Section -->
+        <section id="plates-boxes" class="menu-section">
+            <h2>Plates & Boxes</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pie's Box" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺑﻮﻛﺲ اﻟﻔﻄﺎﻳﺮ</div>
+                                <div class="item-name">Pie's Box</div>
+                            </div>
+                            <div class="item-price">36 SAR</div>
+                        </div>
+                        <p class="item-description">A box that brings together the best choices of Themar's famous pies of your choice between falafel, egg and cheese, or chicken.</p>
+                        <span class="item-calories">2520 Cal</span>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1511994298241-608e28f14fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Arabic Box" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">اﻟﺒﻮﻛﺲ اﻟﻌﺮﺑﻲ</div>
+                                <div class="item-name">Arabic Box</div>
+                            </div>
+                            <div class="item-price">33 SAR</div>
+                        </div>
+                        <p class="item-description">10 falafel pieces with Arabic bread (brown/regular), prepared daily in our bakery for sharing.</p>
+                        <span class="item-calories">1400 Cal</span>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Falafel Plate" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺻﺤﻦ ﻓﻼﻓﻞ</div>
+                                <div class="item-name">Falafel Plate</div>
+                            </div>
+                            <div class="item-price">17 SAR</div>
+                        </div>
+                        <p class="item-description">A mix of falafel and fresh ingredients like eggplant, pickles, parsley, eggs, potatoes, chickpeas, tahini, and Themar's famous Levantine sauce with fresh bread.</p>
+                        <span class="item-calories">1420 Cal</span>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Momtaz Box" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺑﻮﻛﺲ ﻣﻤﺘﺎز</div>
+                                <div class="item-name">Momtaz Box</div>
+                            </div>
+                            <div class="item-price">34 SAR</div>
+                        </div>
+                        <p class="item-description">Quiche pies inspired by Themar's favorite flavors for sharing.</p>
+                        <span class="item-calories">2360 Cal</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sandwiches Section -->
+        <section id="sandwiches" class="menu-section">
+            <h2>Sandwiches</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1561336318-29a476a5f592?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Everything Sandwich" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺻﺒﺔ ﻛﻞ ﺷﻲء</div>
+                                <div class="item-name">Everything Sandwich</div>
+                            </div>
+                            <div class="item-price">10 SAR</div>
+                        </div>
+                        <p class="item-description">Falafel wrap with egg, hummus, cream cheese and cheddar cheese with bread of your choice (saj or unfolded) with a mix of fresh ingredients.</p>
+                        <span class="item-calories">700 Cal</span>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Special Sandwich" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺻﺒﺔ ﺳﺒﻴﺸﺎل</div>
+                                <div class="item-name">Special Sandwich</div>
+                            </div>
+                            <div class="item-price">8 SAR</div>
+                        </div>
+                        <p class="item-description">Falafel wrap with egg and hummus with bread of your choice (saj or unfolded) with a mix of fresh ingredients.</p>
+                        <span class="item-calories">800 Cal</span>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1561336318-29a476a5f592?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Arabic Sandwich" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺳﺎﻧﺪوﻳﺘﺶ ﻋﺮﺑﻲ</div>
+                                <div class="item-name">Arabic Sandwich</div>
+                            </div>
+                            <div class="item-price">7 SAR</div>
+                        </div>
+                        <p class="item-description">Falafel sandwich with Arabic bread (brown/regular) prepared daily with a mix of fresh ingredients.</p>
+                        <span class="item-calories">600 Cal</span>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Regular Sandwich" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺳﺎﻧﺪوﻳﺘﺶ ﻋﺎدي</div>
+                                <div class="item-name">Regular Sandwich</div>
+                            </div>
+                            <div class="item-price">6 SAR</div>
+                        </div>
+                        <p class="item-description">Falafel sandwich with bread of your choice (saj or unfolded) with a mix of fresh ingredients.</p>
+                        <span class="item-calories">490 Cal</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Add-ons Section -->
+        <section id="add-ons" class="menu-section">
+            <h2>Add-ons</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Fried Cauliflower" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">زﻫﺮة ﻣﻘﻠﻴﺔ</div>
+                                <div class="item-name">Fried Cauliflower</div>
+                            </div>
+                            <div class="item-price">1 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1587486913049-53fc88980cfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Egg" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺑﻴﺾ</div>
+                                <div class="item-name">Egg</div>
+                            </div>
+                            <div class="item-price">1 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cheddar Cheese" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺟﺒﻦ ﺷﻴﺪر</div>
+                                <div class="item-name">Cheddar Cheese</div>
+                            </div>
+                            <div class="item-price">1 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1546069901-aa0d1a41b1b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Hummus" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺣﻤﺺ</div>
+                                <div class="item-name">Hummus</div>
+                            </div>
+                            <div class="item-price">1 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1606914469631-bb0c703ae2a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pickles" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﻣﺨﻠﻞ</div>
+                                <div class="item-name">Pickles</div>
+                            </div>
+                            <div class="item-price">1 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cream Cheese" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺟﺒﻦ ﺳﺎﺋﻞ</div>
+                                <div class="item-name">Cream Cheese</div>
+                            </div>
+                            <div class="item-price">1 SAR</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Side Orders Section -->
+        <section id="side-orders" class="menu-section">
+            <h2>Side Orders</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Falafel Pieces" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺣﺒﺎت ﻓﻼﻓﻞ</div>
+                                <div class="item-name">Falafel Pieces</div>
+                            </div>
+                            <div class="item-price">3/7/12 pieces: 7/14/16 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1546069901-aa0d1a41b1b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Themar Hummus" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺣﻤﺺ ﺛﻤﺎر</div>
+                                <div class="item-name">Themar Hummus</div>
+                            </div>
+                            <div class="item-price">15/25/48 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Themar Fries" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺑﻄﺎﻃﺲ ﺛﻤﺎر</div>
+                                <div class="item-name">Themar Fries</div>
+                            </div>
+                            <div class="item-price">16 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1606914469631-bb0c703ae2a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Mixed Themar Pickles" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﻣﺨﻠﻞ ﺛﻤﺎر ﻣﺸﻜﻞ</div>
+                                <div class="item-name">Mixed Themar Pickles</div>
+                            </div>
+                            <div class="item-price">1 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pcs 2 Bread" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺧﺒﺰ ﺣﺒﺘﻴﻦ</div>
+                                <div class="item-name">Pcs 2 Bread</div>
+                            </div>
+                            <div class="item-price">2 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Fries Box" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺑﻄﺎﻃﺲ اﻟﺸﻠﺔ</div>
+                                <div class="item-name">Fries Box</div>
+                            </div>
+                            <div class="item-price">Regular/Medium: 4/6/9 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Falafel Box" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﻓﻼﻓﻞ اﻟﺸﻠﺔ</div>
+                                <div class="item-name">Falafel Box</div>
+                            </div>
+                            <div class="item-price">Regular/Medium: 6/9/14 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Hot Levantine Dip" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺷﻄﺔ ﺷﺎﻣﻴﻪ ﺗﻐﻤﻴﺲ</div>
+                                <div class="item-name">Hot Levantine Dip</div>
+                            </div>
+                            <div class="item-price">2 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Tahina Dip" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﻃﺤﻴﻨﺔ ﺗﻐﻤﻴﺲ</div>
+                                <div class="item-name">Tahina Dip</div>
+                            </div>
+                            <div class="item-price">2 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1546069901-aa0d1a41b1b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Hummus Dip" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺣﻤﺺ ﺗﻐﻤﻴﺲ</div>
+                                <div class="item-name">Hummus Dip</div>
+                            </div>
+                            <div class="item-price">2 SAR</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Drinks Section -->
+        <section id="drinks" class="menu-section">
+            <h2>Drinks</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Water" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﻣﺎء</div>
+                                <div class="item-name">Water</div>
+                            </div>
+                            <div class="item-price">1 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Rabie Juice" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﻋﺼﻴﺮ رﺑﻴﻊ</div>
+                                <div class="item-name">Rabie Juice</div>
+                            </div>
+                            <div class="item-price">2 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Soft Drinks" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﻣﺸﺮوﺑﺎت ﻏﺎزﻳﺔ</div>
+                                <div class="item-name">Soft Drinks</div>
+                            </div>
+                            <div class="item-price">3 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Fresh Juice" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﻋﺼﺎﺋﺮ ﻃﺎزﺟﺔ</div>
+                                <div class="item-name">Fresh Juice</div>
+                            </div>
+                            <div class="item-price">7 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Special Tea" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺷﺎﻫﻲ ﻣﻀﺒﻮط</div>
+                                <div class="item-name">Special Tea</div>
+                            </div>
+                            <div class="item-price">1 SAR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Tea Box" class="item-image">
+                    <div class="item-details">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-name-arabic">ﺑﻮﻛﺲ اﻟﺸﺎﻫﻲ</div>
+                                <div class="item-name">Tea Box</div>
+                            </div>
+                            <div class="item-price">18 SAR</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Category switching
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const menuSections = document.querySelectorAll('.menu-section');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons and sections
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    menuSections.forEach(section => section.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Show corresponding section
+                    const category = this.getAttribute('data-category');
+                    document.getElementById(category).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
